@@ -9,12 +9,12 @@
     },
     "files": [
         "README.md",
-        "keyboard.ts",
+        "Math-Automatic.ts",
         "ws2812b.ts",
         "motor.ts",
         "servo.ts",
         "sendBuffer.asm",
-        "_locales/zh/keyboard-strings.json"
+        "_locales/zh/Math-Automatic-strings.json"
     ],
     "testFiles": [
         "test.ts"
