@@ -395,31 +395,4 @@ namespace keyboard {
         basic.pause(20);
     })
 
-    //% advanced=true shim=maqueenIR::initIR
-    function initIR(pin: Pins): void {
-        return
-    }
-    let alreadyInit = 0
-    function maqueenInit(): void {
-        if (alreadyInit == 1) {
-            return
-        }
-        initIR(Pins.P16)
-        alreadyInit = 1
-    }
-
-    //% weight=10
-    //% block="Get product information"
-    export function IR_read_version(): string {
-        maqueenInit()
-        pins.i2cWriteNumber(0x10, 50, NumberFormat.UInt8BE);
-        let dataLen = pins.i2cReadNumber(0x10, NumberFormat.UInt8BE);
-        pins.i2cWriteNumber(0x10, 51, NumberFormat.UInt8BE);
-        let buf = pins.i2cReadBuffer(0x10, dataLen, false);
-        let version = "";
-        for (let index = 0; index < dataLen; index++) {
-            version += String.fromCharCode(buf[index])
-        }
-        return version
-    }
 }
