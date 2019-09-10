@@ -86,7 +86,7 @@ interface KV {
 /**
  * Functions for DFRobot gamer:bit Players.
  */
-//% weight=10 color=#DF6721 icon="\uf11b" block="Math-Automatic"
+//% weight=10 color=#DF6721 icon="\uf11b" block="Math_Automatic"
 namespace keyboard {
     let PIN_INIT = 0;
     //let kbCallback: Action = null;
@@ -394,4 +394,32 @@ namespace keyboard {
         }
         basic.pause(20);
     })
+
+    //% advanced=true shim=maqueenIR::initIR
+    function initIR(pin: Pins): void {
+        return
+    }
+    let alreadyInit = 0
+    function maqueenInit(): void {
+        if (alreadyInit == 1) {
+            return
+        }
+        initIR(Pins.P16)
+        alreadyInit = 1
+    }
+
+    //% weight=10
+    //% block="Get product information"
+    export function IR_read_version(): string {
+        maqueenInit()
+        pins.i2cWriteNumber(0x10, 50, NumberFormat.UInt8BE);
+        let dataLen = pins.i2cReadNumber(0x10, NumberFormat.UInt8BE);
+        pins.i2cWriteNumber(0x10, 51, NumberFormat.UInt8BE);
+        let buf = pins.i2cReadBuffer(0x10, dataLen, false);
+        let version = "";
+        for (let index = 0; index < dataLen; index++) {
+            version += String.fromCharCode(buf[index])
+        }
+        return version
+    }
 }
