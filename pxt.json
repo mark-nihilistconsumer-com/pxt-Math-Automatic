@@ -10,10 +10,8 @@
     "files": [
         "README.md",
         "Math-Automatic.ts",
-        "ws2812b.ts",
         "motor.ts",
         "servo.ts",
-        "sendBuffer.asm",
         "_locales/zh/Math-Automatic-strings.json"
     ],
     "testFiles": [
